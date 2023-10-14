@@ -3,7 +3,7 @@ import '../css/custom.css';
 import * as yup from 'yup';
 import i18next from 'i18next';
 import watch from './view.js';
-import resources from '../locales/index.js';
+import ru from '../locales/index.js';
 import yupLocales from '../locales/yupLocales.js';
 
 export default () => {
@@ -33,12 +33,12 @@ export default () => {
     .init({
       lng: defaultLanguage,
       debug: false,
-      resources,
+      resources: { ru },
     })
     .then(() => {
       yup.setLocale(yupLocales);
 
-      const watchedState = watch(state, elements);
+      const watchedState = watch(state, elements, i18nextInstance);
 
       elements.form.addEventListener('submit', (e) => {
         e.preventDefault();
