@@ -5,12 +5,14 @@ import i18next from 'i18next';
 import watch from './view.js';
 import ru from '../locales/index.js';
 import yupLocales from '../locales/yupLocales.js';
+import createElements from './createElements.js';
 
 export default () => {
   const state = {
     form: {
       isValid: true,
       error: null,
+      status: null,
     },
     feeds: [],
     posts: [],
@@ -48,6 +50,7 @@ export default () => {
         validate(url, arrayOfUrls)
           .then(() => {
             watchedState.form.isValid = true;
+            createElements(url, watchedState);
           })
           .catch((error) => {
             watchedState.form.isValid = false;
