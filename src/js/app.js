@@ -22,6 +22,7 @@ export default () => {
     form: document.querySelector('.rss-form'),
     input: document.querySelector('#url-input'),
     feedbackField: document.querySelector('.feedback'),
+    submitButton: document.querySelector('[type=submit]'),
   };
 
   const validate = (url, arrayOfUrls) => {
@@ -54,6 +55,7 @@ export default () => {
           })
           .catch((error) => {
             watchedState.form.isValid = false;
+            watchedState.form.status = 'fail';
             watchedState.form.error = error.message;
           });
       });

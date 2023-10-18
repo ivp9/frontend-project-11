@@ -13,3 +13,17 @@ export const renderBorder = (isValid, elements) => {
 export const renderFeedbackField = (error, elements, i18nextInstance) => {
   elements.feedbackField.textContent = i18nextInstance.t(`${error}`);
 };
+
+export const renderForm = (value, elements, form) => {
+  if (value === 'loading') {
+    elements.submitButton.disabled = true;
+    elements.feedbackField.textContent = '';
+    form.isValid = false;
+  } else if (value === 'success') {
+    elements.submitButton.disabled = false;
+    elements.form.reset();
+    elements.input.focus();
+  } else if (value === 'fail') {
+    elements.submitButton.disabled = false;
+  }
+};

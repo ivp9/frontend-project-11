@@ -1,6 +1,6 @@
 const parseRssContent = (response, url) => {
   const parser = new DOMParser();
-  const parsedResponse = parser.parseFromString(response, 'text/xml');
+  const parsedResponse = parser.parseFromString(response, 'application/xml');
 
   const parseError = parsedResponse.querySelector('parsererror');
   if (parseError) {

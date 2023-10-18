@@ -1,6 +1,26 @@
 import getDataFromUrl from './getDataFromUrl.js';
 import parseRssContent from './parsers.js';
 
+const webError = (watchedState) => {
+  watchedState.form.isValid = false;
+  watchedState.form.error = 'texts.statusMessage.webError';
+  watchedState.form.status = 'fail';
+};
+
+const novalidRssError = (watchedState) => {
+  watchedState.form.isValid = false;
+  watchedState.form.status = 'fail';
+  watchedState.form.error = 'texts.statusMessage.noValidRss';
+};
+
+const errorCatching = (e, watchedState) => {
+  if (e.isParsingError) {
+    novalidRssError(watchedState);
+  } else {
+    webError(watchedState);
+  }
+};
+
 const createElements = (url, watchedState) => {
   getDataFromUrl(url)
     .then((response) => {
@@ -8,12 +28,11 @@ const createElements = (url, watchedState) => {
         titleRSS, descriptionRSS, link, resultPosts,
       } = parseRssContent(response, url);
 
+      watchedState.form.status = 'success';
       watchedState.form.error = 'texts.statusMessage.successful';
-
-      console.log(titleRSS, descriptionRSS, link, resultPosts);
     })
     .catch((e) => {
-      console.log(e);
+      errorCatching(e, watchedState);
     });
 };
 
