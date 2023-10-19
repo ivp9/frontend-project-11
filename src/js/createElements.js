@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import getDataFromUrl from './getDataFromUrl.js';
 import parseRssContent from './parsers.js';
 
@@ -30,6 +31,10 @@ const createElements = (url, watchedState) => {
 
       watchedState.form.status = 'success';
       watchedState.form.error = 'texts.statusMessage.successful';
+      watchedState.feeds.unshift({ titleRSS, descriptionRSS, link });
+
+      const posts = resultPosts.map((post) => ({ ...post, id: _.uniqueId() }));
+      watchedState.posts = [...posts, ...watchedState.posts];
     })
     .catch((e) => {
       errorCatching(e, watchedState);

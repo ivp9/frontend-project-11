@@ -12,6 +12,11 @@ export default {
         noValidRss: 'Ресурс не содержит валидный RSS',
         webError: 'Ошибка сети',
       },
+      rssLists: {
+        feeds: 'Фиды',
+        posts: 'Посты',
+        watches: 'Просмотр',
+      },
     },
   },
 };

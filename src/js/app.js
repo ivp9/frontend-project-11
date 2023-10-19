@@ -10,12 +10,19 @@ import createElements from './createElements.js';
 export default () => {
   const state = {
     form: {
-      isValid: true,
+      isValid: null,
       error: null,
       status: null,
     },
     feeds: [],
     posts: [],
+    feedsAndPosts: {
+      currentIdAndButton: {},
+    },
+    ui: {
+      watchedPostsId: new Set(),
+    },
+    postIdInModal: '',
   };
 
   const elements = {
@@ -23,6 +30,7 @@ export default () => {
     input: document.querySelector('#url-input'),
     feedbackField: document.querySelector('.feedback'),
     submitButton: document.querySelector('[type=submit]'),
+    feedField: document.querySelector('.feeds'),
   };
 
   const validate = (url, arrayOfUrls) => {
@@ -40,11 +48,11 @@ export default () => {
     })
     .then(() => {
       yup.setLocale(yupLocales);
-
       const watchedState = watch(state, elements, i18nextInstance);
 
       elements.form.addEventListener('submit', (e) => {
         e.preventDefault();
+        watchedState.form.status = 'loading';
         const formData = new FormData(e.target);
         const url = formData.get('url');
         const arrayOfUrls = watchedState.feeds;
