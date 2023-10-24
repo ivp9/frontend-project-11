@@ -70,8 +70,79 @@ export const renderFeeds = (value, elements, i18nextInstance, newFeed = []) => {
   elements.feedField.append(divCardBorder);
 };
 
-export const renderPosts = () => {};
+const addTextSecondary = (watchedPostsId, a) => {
+  watchedPostsId.forEach((id) => {
+    if (a.dataset.id === id) {
+      a.classList.add('text-secondary');
+    }
+  });
+};
 
-export const renderButtonsAndModal = () => {};
+export const renderPosts = (values, elements, i18nextInstance, watchedPostsId, newPosts = []) => {
+  values.forEach((value) => {
+    const a = document.createElement('a');
+    a.href = value.link;
+    a.textContent = value.title;
+    a.classList.add('fw-bold');
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.dataset.id = value.id;
 
-export const renderViewed = () => {};
+    addTextSecondary(watchedPostsId, a);
+
+    const button = document.createElement('button');
+    button.textContent = i18nextInstance.t('texts.rssLists.watches');
+    button.classList.add('btn', 'btn-outline-primary', '.btn-primary', 'btn-sm');
+    button.type = 'button';
+    button.setAttribute('data-id', value.id);
+    button.setAttribute('data-bs-toggle', 'modal');
+    button.setAttribute('data-bs-target', '#modal');
+
+    const liPosts = document.createElement('li');
+    liPosts.classList.add(
+      'list-group-item',
+      'd-flex',
+      'justify-content-between',
+      'align-items-start',
+      'border-0',
+      'border-end-0',
+    );
+    [a, button].forEach((item) => liPosts.append(item));
+    newPosts.push(liPosts);
+
+    const ulPosts = document.createElement('ul');
+    ulPosts.classList.add('list-group', 'border-0', 'rounded-0');
+    ulPosts.replaceChildren(...newPosts);
+
+    const h2Posts = document.createElement('h2');
+    h2Posts.classList.add('card-title', 'h4');
+    h2Posts.textContent = i18nextInstance.t('texts.rssLists.posts');
+    const divCardBodyPosts = document.createElement('div');
+    divCardBodyPosts.classList.add('card-body');
+    divCardBodyPosts.replaceChildren(h2Posts);
+
+    const divCardBorderPosts = document.createElement('div');
+    divCardBorderPosts.classList.add('card', 'border-0');
+    [divCardBodyPosts, ulPosts].forEach((item) => {
+      divCardBorderPosts.append(item);
+    });
+
+    elements.postsField.textContent = '';
+    elements.postsField.append(divCardBorderPosts);
+  });
+};
+
+export const renderButtonsAndModal = (postId, elements, posts) => {
+  const readMoreButton = document.querySelector('.btn-primary');
+  const post = posts.find((item) => item.id === postId);
+  elements.modalTitle.textContent = post.title;
+  elements.modalBody.textContent = post.description;
+  readMoreButton.href = post.link;
+};
+
+export const renderViewed = (watchedPostsId) => {
+  const links = document.querySelectorAll('.fw-bold');
+  links.forEach((a) => {
+    addTextSecondary(watchedPostsId, a);
+  });
+};

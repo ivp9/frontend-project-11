@@ -5,7 +5,7 @@ import i18next from 'i18next';
 import watch from './view.js';
 import ru from '../locales/index.js';
 import yupLocales from '../locales/yupLocales.js';
-import createElements from './createElements.js';
+import { updatePosts, createElements } from './createElements.js';
 
 export default () => {
   const state = {
@@ -31,6 +31,10 @@ export default () => {
     feedbackField: document.querySelector('.feedback'),
     submitButton: document.querySelector('[type=submit]'),
     feedField: document.querySelector('.feeds'),
+    postsField: document.querySelector('.posts'),
+    modal: document.querySelector('.modal'),
+    modalTitle: document.querySelector('.modal-title'),
+    modalBody: document.querySelector('.modal-body'),
   };
 
   const validate = (url, arrayOfUrls) => {
@@ -49,6 +53,15 @@ export default () => {
     .then(() => {
       yup.setLocale(yupLocales);
       const watchedState = watch(state, elements, i18nextInstance);
+      updatePosts(watchedState);
+
+      elements.postsField.addEventListener('click', (eViewed) => {
+        if (eViewed.target.tagName.toUpperCase() === 'BUTTON' || eViewed.target.tagName.toUpperCase() === 'A') {
+          const currentId = eViewed.target.dataset.id;
+          watchedState.ui.watchedPostsId.add(currentId);
+          watchedState.postIdInModal = currentId;
+        }
+      });
 
       elements.form.addEventListener('submit', (e) => {
         e.preventDefault();

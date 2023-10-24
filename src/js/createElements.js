@@ -22,7 +22,31 @@ const errorCatching = (e, watchedState) => {
   }
 };
 
-const createElements = (url, watchedState) => {
+export const updatePosts = (watchedState) => {
+  const update = () => {
+    const updatedPosts = watchedState.feeds.map((feed) => getDataFromUrl(feed.link)
+      .then((response) => {
+        const { resultPosts } = parseRssContent(response, feed.link);
+
+        const newPosts = resultPosts.filter(
+          (post) => !watchedState.posts
+            .some((statePost) => statePost.link === post.link),
+        )
+          .map((post) => ({ ...post, id: _.uniqueId() }));
+
+        watchedState.posts = [...newPosts, ...watchedState.posts];
+      })
+      .catch((e) => {
+        console.log(e);
+      }));
+
+    Promise.all(updatedPosts).then(() => setTimeout(update, 5000));
+  };
+
+  update();
+};
+
+export const createElements = (url, watchedState) => {
   getDataFromUrl(url)
     .then((response) => {
       const {
@@ -40,5 +64,3 @@ const createElements = (url, watchedState) => {
       errorCatching(e, watchedState);
     });
 };
-
-export default createElements;
