@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'bootstrap';
 import '../css/custom.css';
 import * as yup from 'yup';
 import i18next from 'i18next';
@@ -42,6 +43,8 @@ export default () => {
     return schema.validate(url);
   };
 
+  const modal = new Modal(elements.modal);
+
   const defaultLanguage = 'ru';
   const i18nextInstance = i18next.createInstance();
   i18nextInstance
@@ -60,6 +63,7 @@ export default () => {
           const currentId = eViewed.target.dataset.id;
           watchedState.ui.watchedPostsId.add(currentId);
           watchedState.postIdInModal = currentId;
+          modal.show();
         }
       });
 
