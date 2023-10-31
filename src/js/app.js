@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal } from 'bootstrap';
 import '../css/custom.css';
 import * as yup from 'yup';
 import i18next from 'i18next';
@@ -35,7 +34,7 @@ export default () => {
     submitButton: document.querySelector('[type=submit]'),
     feedField: document.querySelector('.feeds'),
     postsField: document.querySelector('.posts'),
-    modal: document.querySelector('.modal'),
+    modal: document.querySelector('#modal'),
     modalTitle: document.querySelector('.modal-title'),
     modalBody: document.querySelector('.modal-body'),
   };
@@ -108,8 +107,6 @@ export default () => {
       });
   };
 
-  const modal = new Modal(elements.modal);
-
   const defaultLanguage = 'ru';
   const i18nextInstance = i18next.createInstance();
   i18nextInstance
@@ -128,7 +125,6 @@ export default () => {
           const currentId = eViewed.target.dataset.id;
           watchedState.ui.watchedPostsId.add(currentId);
           watchedState.postIdInModal = currentId;
-          modal.show();
         }
       });
 
