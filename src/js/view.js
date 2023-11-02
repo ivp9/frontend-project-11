@@ -134,12 +134,20 @@ const renderPosts = (values, elements, i18nextInstance, watchedPostsId, newPosts
   });
 };
 
+const openModal = (title, description, link, elements) => {
+  const modalTitle = elements.modal.querySelector('.modal-title');
+  const modalBody = elements.modal.querySelector('.modal-body');
+  const fullArticleLink = elements.modal.querySelector('.full-article');
+
+  modalTitle.textContent = title;
+  modalBody.textContent = description;
+  fullArticleLink.setAttribute('href', link);
+};
+
 const renderButtonsAndModal = (postId, elements, posts) => {
-  const readMoreButton = document.querySelector('.btn-primary');
-  const post = posts.find((item) => item.id === postId);
-  elements.modalTitle.textContent = post.title;
-  elements.modalBody.textContent = post.description;
-  readMoreButton.href = post.link;
+  const targetContent = posts.find((item) => item.id === postId);
+  const { title, description, link } = targetContent ?? {};
+  openModal(title, description, link, elements);
 };
 
 const renderViewed = (watchedPostsId) => {

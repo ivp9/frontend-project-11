@@ -35,8 +35,6 @@ export default () => {
     feedField: document.querySelector('.feeds'),
     postsField: document.querySelector('.posts'),
     modal: document.querySelector('#modal'),
-    modalTitle: document.querySelector('.modal-title'),
-    modalBody: document.querySelector('.modal-body'),
   };
 
   const validate = (url, arrayOfUrls) => {
@@ -120,11 +118,11 @@ export default () => {
       const watchedState = watch(state, elements, i18nextInstance);
       updatePosts(watchedState);
 
-      elements.postsField.addEventListener('click', (eViewed) => {
-        if (eViewed.target.tagName.toUpperCase() === 'BUTTON' || eViewed.target.tagName.toUpperCase() === 'A') {
-          const currentId = eViewed.target.dataset.id;
-          watchedState.ui.watchedPostsId.add(currentId);
-          watchedState.postIdInModal = currentId;
+      elements.postsField.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        if (id) {
+          watchedState.ui.watchedPostsId.add(id);
+          watchedState.postIdInModal = id;
         }
       });
 
