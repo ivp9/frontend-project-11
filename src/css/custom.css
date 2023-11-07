@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 .text-muted {
     --bs-text-opacity: 1;
     color: #6c757d !important;

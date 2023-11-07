@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/custom.css';
 import * as yup from 'yup';
 import i18next from 'i18next';
 import _ from 'lodash';
@@ -34,7 +32,7 @@ export default () => {
     submitButton: document.querySelector('[type=submit]'),
     feedField: document.querySelector('.feeds'),
     postsField: document.querySelector('.posts'),
-    modal: document.querySelector('#modal'),
+    modal: document.getElementById('modal'),
   };
 
   const validate = (url, arrayOfUrls) => {
@@ -118,12 +116,11 @@ export default () => {
       const watchedState = watch(state, elements, i18nextInstance);
       updatePosts(watchedState);
 
-      elements.postsField.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        if (id) {
-          watchedState.ui.watchedPostsId.add(id);
-          watchedState.postIdInModal = id;
-        }
+      elements.modal.addEventListener('show.bs.modal', (e) => {
+        const button = e.relatedTarget;
+        const recipientId = button.getAttribute('data-id');
+        watchedState.ui.watchedPostsId.add(recipientId);
+        watchedState.postIdInModal = recipientId;
       });
 
       elements.form.addEventListener('submit', (e) => {
