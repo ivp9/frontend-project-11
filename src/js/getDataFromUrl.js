@@ -7,7 +7,7 @@ const getStringUrl = (url) => {
   return allOriginsHexletUrl.toString();
 };
 
-const getDatafromUrl = (url) => axios.get(getStringUrl(url), { timeout: 45000 })
+const getDatafromUrl = (url) => axios.get(getStringUrl(url), { timeout: 5000 })
   .then((response) => response.data.contents);
 
 export default getDatafromUrl;
