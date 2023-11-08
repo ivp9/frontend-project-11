@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getStringUrl = (url) => {
   const allOriginsHexletUrl = new URL('https://allorigins.hexlet.app/get');
-  allOriginsHexletUrl.searchParams.set('disableCashe', 'true');
+  allOriginsHexletUrl.searchParams.set('disableCache', 'true');
   allOriginsHexletUrl.searchParams.set('url', url);
   return allOriginsHexletUrl.toString();
 };
