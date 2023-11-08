@@ -128,7 +128,7 @@ export default () => {
         watchedState.form.status = 'loading';
         const formData = new FormData(e.target);
         const url = formData.get('url');
-        const arrayOfUrls = watchedState.feeds;
+        const arrayOfUrls = watchedState.feeds.map((feed) => feed.link);
         validate(url, arrayOfUrls)
           .then(() => {
             watchedState.form.isValid = true;
