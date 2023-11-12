@@ -30,7 +30,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.28.1",
     "html-webpack-plugin": "^5.5.3",
-    "mini-css-extract-plugin": "2.4.4",
+    "mini-css-extract-plugin": "^2.7.6",
     "postcss-loader": "^7.3.3",
     "prettier": "^2.8.4",
     "sass": "^1.69.1",
