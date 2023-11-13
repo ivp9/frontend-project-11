@@ -43,6 +43,7 @@
     "workbox-webpack-plugin": "^7.0.0"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
     "i18next": "^23.5.1",
