@@ -14,4 +14,3 @@ npm run build
 ### Screenshots of project
 ![screenshot](https://github.com/ivp9/frontend-project-11/blob/main/pictures/screenshot1.png)
 ![screenshot](https://github.com/ivp9/frontend-project-11/blob/main/pictures/screenshot2.png)
-![screenshot](https://github.com/ivp9/frontend-project-11/blob/main/pictures/screenshot3.png)
