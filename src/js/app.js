@@ -42,6 +42,7 @@ export default () => {
 
   const updatePosts = (watchedState) => {
     const update = () => {
+      const delayForUpdateFunc = 5000;
       const updatedPosts = watchedState.feeds.map((feed) => getDataFromUrl(feed.link)
         .then((response) => {
           const { resultPosts } = parseRssContent(response, feed.link);
@@ -58,13 +59,13 @@ export default () => {
           console.log(e);
         }));
 
-      Promise.all(updatedPosts).then(() => setTimeout(update, 5000));
+      Promise.all(updatedPosts).then(() => setTimeout(update, delayForUpdateFunc));
     };
 
     update();
   };
 
-  const webError = (watchedState) => {
+  const webErrorChangingState = (watchedState) => {
     watchedState.form.isValid = false;
     watchedState.form.error = 'texts.statusMessage.webError';
     watchedState.form.status = 'fail';
@@ -80,7 +81,7 @@ export default () => {
     if (e.isParsingError) {
       novalidRssError(watchedState);
     } else {
-      webError(watchedState);
+      webErrorChangingState(watchedState);
     }
   };
 
