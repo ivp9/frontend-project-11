@@ -2,6 +2,9 @@
 
 RSS Agregator is a service for agregating RSS feeds that helps you to easily read unlimited numbers of feeds from different sources and blogs and do updates of them. Check how the RSS Agregator works you can [here](https://rss-9cv9.onrender.com/).
 
+### Badges
+[![hexlet-check](https://github.com/ivp9/frontend-project-11/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ivp9/frontend-project-11/actions/workflows/hexlet-check.yml)
+
 ### System requirements
 Node.js version - v18.14.1
 
