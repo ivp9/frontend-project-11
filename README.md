@@ -4,6 +4,7 @@ RSS Agregator is a service for agregating RSS feeds that helps you to easily rea
 
 ### Badges
 [![hexlet-check](https://github.com/ivp9/frontend-project-11/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ivp9/frontend-project-11/actions/workflows/hexlet-check.yml)
+[![eslint-check](https://github.com/ivp9/frontend-project-11/actions/workflows/eslint-check.yml/badge.svg)](https://github.com/ivp9/frontend-project-11/actions/workflows/eslint-check.yml)
 
 ### System requirements
 Node.js version - v18.14.1
