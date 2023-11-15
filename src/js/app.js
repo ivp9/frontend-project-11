@@ -56,6 +56,7 @@ export default () => {
           watchedState.posts = [...newPosts, ...watchedState.posts];
         })
         .catch((e) => {
+          // eslint-disable-next-line no-console
           console.log(e);
         }));
 
