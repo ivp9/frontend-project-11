@@ -172,7 +172,7 @@ const watch = (state, elements, i18nextInstance) => {
       case 'feeds':
         renderFeeds(value, elements, i18nextInstance);
         break;
-      case 'postIdInModal':
+      case 'modal.postId':
         renderButtonsAndModal(value, elements, watchedState.posts);
         break;
       case 'ui.watchedPostsId':

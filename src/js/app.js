@@ -16,13 +16,12 @@ export default () => {
     },
     feeds: [],
     posts: [],
-    feedsAndPosts: {
-      currentIdAndButton: {},
-    },
     ui: {
       watchedPostsId: new Set(),
     },
-    postIdInModal: '',
+    modal: {
+      postId: null,
+    },
   };
 
   const elements = {
@@ -122,7 +121,7 @@ export default () => {
         const button = e.relatedTarget;
         const recipientId = button.getAttribute('data-id');
         watchedState.ui.watchedPostsId.add(recipientId);
-        watchedState.postIdInModal = recipientId;
+        watchedState.modal.postId = recipientId;
       });
 
       elements.form.addEventListener('submit', (e) => {

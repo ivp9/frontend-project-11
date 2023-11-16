@@ -2,5 +2,5 @@
 
 .text-muted {
     --bs-text-opacity: 1;
-    color: #6c757d !important;
+    color: #6c757d;
 }
