@@ -90,7 +90,9 @@ export default () => {
       .then((response) => {
         const {
           titleRSS, descriptionRSS, link, resultPosts,
-        } = parseRssContent(response, url);
+        } = parseRssContent(response);
+
+        parseRssContent.link = url;
 
         watchedState.form.status = 'success';
         watchedState.form.error = 'texts.statusMessage.successful';

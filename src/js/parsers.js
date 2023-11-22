@@ -1,4 +1,4 @@
-const parseRssContent = (response, url) => {
+const parseRssContent = (response) => {
   const parser = new DOMParser();
   const parsedResponse = parser.parseFromString(response, 'application/xml');
 
@@ -20,7 +20,7 @@ const parseRssContent = (response, url) => {
   });
 
   return {
-    titleRSS, descriptionRSS, link: url, resultPosts,
+    titleRSS, descriptionRSS, link: '', resultPosts,
   };
 };
 
