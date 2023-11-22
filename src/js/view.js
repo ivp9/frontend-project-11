@@ -16,11 +16,13 @@ const renderFeedbackField = (error, elements, i18nextInstance) => {
   elements.feedbackField.textContent = i18nextInstance.t(`${error}`);
 };
 
-const renderForm = (value, elements, form) => {
+const renderForm = (value, elements) => {
   if (value === 'loading') {
     elements.submitButton.disabled = true;
     elements.feedbackField.textContent = '';
-    form.isValid = false;
+    elements.input.classList.add('is-invalid');
+    elements.feedbackField.classList.remove('text-success');
+    elements.feedbackField.classList.add('text-danger');
   } else if (value === 'success') {
     elements.submitButton.disabled = false;
     elements.form.reset();
@@ -167,7 +169,7 @@ const watch = (state, elements, i18nextInstance) => {
         renderFeedbackField(value, elements, i18nextInstance);
         break;
       case 'form.status':
-        renderForm(value, elements, watchedState.form);
+        renderForm(value, elements);
         break;
       case 'feeds':
         renderFeeds(value, elements, i18nextInstance);
