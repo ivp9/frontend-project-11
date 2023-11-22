@@ -2,10 +2,10 @@ const parseRssContent = (response, url) => {
   const parser = new DOMParser();
   const parsedResponse = parser.parseFromString(response, 'application/xml');
 
-  const parseError = parsedResponse.querySelector('parsererror');
-  if (parseError) {
-    parseError.isParsingError = true;
-    throw parseError;
+  const parseErrorNode = parsedResponse.querySelector('parsererror');
+  if (parseErrorNode) {
+    parseErrorNode.isParsingError = true;
+    throw parseErrorNode;
   }
 
   const titleRSS = parsedResponse.querySelector('title').textContent;

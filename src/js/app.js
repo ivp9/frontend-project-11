@@ -10,9 +10,9 @@ import parseRssContent from './parsers.js';
 export default () => {
   const state = {
     form: {
-      isValid: null,
+      isValid: false,
       error: null,
-      status: null,
+      status: 'success',
     },
     feeds: [],
     posts: [],
@@ -65,13 +65,13 @@ export default () => {
     update();
   };
 
-  const webErrorChangingState = (watchedState) => {
+  const setWebError = (watchedState) => {
     watchedState.form.isValid = false;
     watchedState.form.error = 'texts.statusMessage.webError';
     watchedState.form.status = 'fail';
   };
 
-  const novalidRssError = (watchedState) => {
+  const setNovalidRssError = (watchedState) => {
     watchedState.form.isValid = false;
     watchedState.form.status = 'fail';
     watchedState.form.error = 'texts.statusMessage.noValidRss';
@@ -79,9 +79,9 @@ export default () => {
 
   const errorCatching = (e, watchedState) => {
     if (e.isParsingError) {
-      novalidRssError(watchedState);
+      setNovalidRssError(watchedState);
     } else {
-      webErrorChangingState(watchedState);
+      setWebError(watchedState);
     }
   };
 
