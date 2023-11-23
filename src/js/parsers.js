@@ -20,7 +20,7 @@ const parseRssContent = (response) => {
   });
 
   return {
-    titleRSS, descriptionRSS, link: '', resultPosts,
+    titleRSS, descriptionRSS, resultPosts,
   };
 };
 

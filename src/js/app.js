@@ -89,14 +89,12 @@ export default () => {
     getDataFromUrl(url)
       .then((response) => {
         const {
-          titleRSS, descriptionRSS, link, resultPosts,
+          titleRSS, descriptionRSS, resultPosts,
         } = parseRssContent(response);
-
-        parseRssContent.link = url;
 
         watchedState.form.status = 'success';
         watchedState.form.error = 'texts.statusMessage.successful';
-        watchedState.feeds.unshift({ titleRSS, descriptionRSS, link });
+        watchedState.feeds.unshift({ titleRSS, descriptionRSS, link: url });
 
         const posts = resultPosts.map((post) => ({ ...post, id: _.uniqueId() }));
         watchedState.posts = [...posts, ...watchedState.posts];
