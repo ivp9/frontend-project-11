@@ -16,24 +16,24 @@ const renderFeedbackField = (error, elements, i18nextInstance) => {
   elements.feedbackField.textContent = i18nextInstance.t(`${error}`);
 };
 
-const renderForm = (value, elements) => {
-  if (value === 'loading') {
+const renderForm = (feed, elements) => {
+  if (feed === 'loading') {
     elements.submitButton.disabled = true;
     elements.feedbackField.textContent = '';
     elements.input.classList.add('is-invalid');
     elements.feedbackField.classList.remove('text-success');
     elements.feedbackField.classList.add('text-danger');
-  } else if (value === 'success') {
+  } else if (feed === 'success') {
     elements.submitButton.disabled = false;
     elements.form.reset();
     elements.input.focus();
-  } else if (value === 'fail') {
+  } else if (feed === 'fail') {
     elements.submitButton.disabled = false;
   }
 };
 
-const renderFeeds = (value, elements, i18nextInstance, newFeed = []) => {
-  value.forEach((element) => {
+const renderFeeds = (feed, elements, i18nextInstance, newFeed = []) => {
+  feed.forEach((element) => {
     const h3Feed = document.createElement('h3');
     h3Feed.classList.add('h6', 'm-0');
     h3Feed.textContent = element.titleRSS;
@@ -82,15 +82,15 @@ const addTextSecondary = (watchedPostsId, a) => {
   });
 };
 
-const renderPosts = (values, elements, i18nextInstance, watchedPostsId, newPosts = []) => {
-  values.forEach((value) => {
+const renderPosts = (feeds, elements, i18nextInstance, watchedPostsId, newPosts = []) => {
+  feeds.forEach((feed) => {
     const a = document.createElement('a');
-    a.href = value.link;
-    a.textContent = value.title;
+    a.href = feed.link;
+    a.textContent = feed.title;
     a.classList.add('fw-bold');
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
-    a.dataset.id = value.id;
+    a.dataset.id = feed.id;
 
     addTextSecondary(watchedPostsId, a);
 
@@ -98,7 +98,7 @@ const renderPosts = (values, elements, i18nextInstance, watchedPostsId, newPosts
     button.textContent = i18nextInstance.t('texts.rssLists.watches');
     button.classList.add('btn', 'btn-outline-primary', '.btn-primary', 'btn-sm');
     button.type = 'button';
-    button.setAttribute('data-id', value.id);
+    button.setAttribute('data-id', feed.id);
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', '#modal');
 
@@ -160,28 +160,28 @@ const renderViewed = (watchedPostsId) => {
 };
 
 const watch = (state, elements, i18nextInstance) => {
-  const watchedState = onChange(state, (path, value) => {
+  const watchedState = onChange(state, (path, feed) => {
     switch (path) {
       case 'form.isValid':
-        renderBorder(value, elements);
+        renderBorder(feed, elements);
         break;
       case 'form.error':
-        renderFeedbackField(value, elements, i18nextInstance);
+        renderFeedbackField(feed, elements, i18nextInstance);
         break;
       case 'form.status':
-        renderForm(value, elements);
+        renderForm(feed, elements);
         break;
       case 'feeds':
-        renderFeeds(value, elements, i18nextInstance);
+        renderFeeds(feed, elements, i18nextInstance);
         break;
       case 'modal.postId':
-        renderButtonsAndModal(value, elements, watchedState.posts);
+        renderButtonsAndModal(feed, elements, watchedState.posts);
         break;
       case 'ui.watchedPostsId':
-        renderViewed(value);
+        renderViewed(feed);
         break;
       case 'posts':
-        renderPosts(value, elements, i18nextInstance, watchedState.ui.watchedPostsId);
+        renderPosts(feed, elements, i18nextInstance, watchedState.ui.watchedPostsId);
         break;
       default:
         throw new Error('Unknown state!');
